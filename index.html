@@ -2,11 +2,11 @@
 <html>
   <head>
   <style>
-    #map-canvas { width:100vw; height:80vh; }
+    #map-canvas { width:500px; height:400px; }
     .layer-wizard-search-label { font-family: sans-serif };
   </style>
   <script type="text/javascript"
-    src="https://maps.google.com/maps/api/js?key=AIzaSyC0ZQBdAZyHKmNjcLBjlVqEN8B3nb3OSyw">
+    src="http://maps.google.com/maps/api/js?sensor=false">
   </script>
   <script type="text/javascript">
     var map;
@@ -16,37 +16,23 @@
     var layer_3;
     function initialize() {
       map = new google.maps.Map(document.getElementById('map-canvas'), {
-        center: new google.maps.LatLng(12.760735565650723, 77.65043322480835),
-        zoom: 19
+        center: new google.maps.LatLng(12.76074521236644, 77.65114531548306),
+        zoom: 20,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       });
-      var style = [
-        {
-          featureType: 'all',
-          elementType: 'all',
-          stylers: [
-            { saturation: -99 }
-          ]
-        }
-      ];
-      var styledMapType = new google.maps.StyledMapType(style, {
-        map: map,
-        name: 'Styled Map'
-      });
-      map.mapTypes.set('map-style', styledMapType);
-      map.setMapTypeId('map-style');
       layer_0 = new google.maps.FusionTablesLayer({
         query: {
           select: "col0",
-          from: "1OhrtuNFDQBfKQD_Q_0og83DONvS6fulTwnZ2DREl"
+          from: "17u_Uo1hN7K5j1xN04iVFEAb1wfNl71_k8M-6Q0pB"
         },
         map: map,
         styleId: 2,
-        templateId: 2
+        templateId: 3
       });
       layer_1 = new google.maps.FusionTablesLayer({
         query: {
           select: "col2",
-          from: "1E46I4AbkT81KWtKNvlKPuR2poGoKHdezuYMKsx6C"
+          from: "1IsbVQWl_xb1KRchTlQAeBVQ1307030zBMvnrZFfP"
         },
         map: map,
         styleId: 2,
@@ -55,7 +41,7 @@
       layer_2 = new google.maps.FusionTablesLayer({
         query: {
           select: "col2",
-          from: "1Rb0l5mFZLwk448rYLTJhsULxpP2u4f8Rg5Odl2hc"
+          from: "1aZ-c5CVc3Zh5v21WUFhV55bQwIH21HRxslxn0AS4"
         },
         map: map,
         styleId: 2,
@@ -64,7 +50,7 @@
       layer_3 = new google.maps.FusionTablesLayer({
         query: {
           select: "col2",
-          from: "1alOZk6J2YHoww9jBLXKgFT1wUPVM-G5y5C2kpWCA"
+          from: "1u0RpTim8QFR-tpJ-MHYNaIF6iyNnsEnlqtaU_R1r"
         },
         map: map,
         styleId: 2,
@@ -75,12 +61,12 @@
       var whereClause;
       var searchString = document.getElementById('search-string_0').value.replace(/'/g, "\\'");
       if (searchString != '--Select--') {
-        whereClause = "'Site check' CONTAINS IGNORING CASE '" + searchString + "'";
+        whereClause = "'Name' CONTAINS IGNORING CASE '" + searchString + "'";
       }
       layer_0.setOptions({
         query: {
           select: "col0",
-          from: "1OhrtuNFDQBfKQD_Q_0og83DONvS6fulTwnZ2DREl",
+          from: "17u_Uo1hN7K5j1xN04iVFEAb1wfNl71_k8M-6Q0pB",
           where: whereClause
         }
       });
@@ -92,7 +78,7 @@
     <div id="map-canvas"></div>
     <div style="margin-top: 10px;">
       <label class="layer-wizard-search-label">
-        Site check
+        Name
         <input type="text" id="search-string_0">
         <input type="button" onclick="changeMap_0()" value="Search">
       </label> 
